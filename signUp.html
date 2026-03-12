@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BLRX SHOP - Sign Up</title>
+<link rel="stylesheet" href="styleSU.css">
+<script src="control.js"></script>
+</head>
+
+<body>
+
+<div class="content">
+
+<img src="logo.png" class="logo-img">
+
+<h1 class="logo-text">BLRX SHOP</h1>
+
+<h2>Sign Up</h2>
+<p>Create your account and start shopping</p>
+
+<div class="login-box">
+  <div class="input-group">
+    <input type="text" id="username" placeholder="Username">
+    <span class="error-msg" id="username-error"></span>
+  </div>
+
+  <div class="input-group">
+    <input type="email" id="email" placeholder="Email">
+    <span class="error-msg" id="email-error"></span>
+  </div>
+
+  <div class="input-group">
+    <input type="password" id="password" placeholder="Password">
+    <span class="error-msg" id="password-error"></span>
+  </div>
+
+  <div class="input-group">
+    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+    <span class="error-msg" id="confirm-error"></span>
+  </div>
+
+  <button class="shop-btn" onclick="validateSignUp()">Sign Up</button>
+
+  <p>Already have an account? <a href="main menu.html" class="link">Log In</a></p>
+</div>
+
+</div>
+
+</body>
+</html>

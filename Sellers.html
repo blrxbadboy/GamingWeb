@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BLRX SHOP - Seller</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<script src="control.js"></script>
+<body>
+
+<div class="content">
+
+<img src="logo.png" class="logo-img">
+<h1 class="logo-text">BLRX SHOP - Seller</h1>
+<h2>Add Your Products</h2>
+<p>Fill the form below to list your Products</p>
+
+<div class="login-box">
+
+  <div class="input-group">
+    <input type="text" id="productName" placeholder="Product Name">
+    <span class="error-msg" id="productName-error"></span>
+  </div>
+
+  <div class="input-group">
+    <input type="text" id="productPrice" placeholder="Price">
+    <span class="error-msg" id="productPrice-error"></span>
+  </div>
+
+  <div class="input-group">
+    <input type="text" id="productImg" placeholder="Image filename or URL">
+    <span class="error-msg" id="productImg-error"></span>
+  </div>
+
+  <div class="input-group">
+    <textarea id="productDesc" placeholder="Description"></textarea>
+    <span class="error-msg" id="productDesc-error"></span>
+  </div>
+
+  <button class="shop-btn" onclick="validateProduct()">Post Product</button>
+
+  <p><a href="Shop.html" class="link">Go to Shop</a></p>
+
+</div>
+
+</div>
+
+</body>
+</html>

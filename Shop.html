@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BLRX SHOP - Shop</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="content">
+
+<img src="logo.png" class="logo-img">
+<h1 class="logo-text">BLRX SHOP</h1>
+<h2>Game Store</h2>
+<p>Browse the games added by sellers</p>
+
+
+<button class="shop-btn" id="clearBtn">Delete All Products</button>
+
+<div class="shop-grid" id="shopGrid"></div>
+
+</div>
+
+<script>
+var shopGrid = document.getElementById('shopGrid');
+var clearBtn = document.getElementById('clearBtn');
+
+// taaml load ll produit
+function loadProducts() {
+    var products = JSON.parse(localStorage.getItem('products')) || [];
+    shopGrid.innerHTML = '';
+
+    if(products.length === 0){
+        shopGrid.innerHTML = '<p style="color:#aaa; font-size:18px;">No products yet.</p>';
+        return;
+    }
+
+    products.forEach(p => {
+        var card = document.createElement('div');
+        card.classList.add('product-card');
+
+        card.innerHTML = `
+            <img src="${p.img}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            <p class="price">$${p.price}</p>
+            <p class="desc">${p.desc}</p>
+        `;
+
+        shopGrid.appendChild(card);
+    });
+}
+
+//button ly tfasakh
+clearBtn.addEventListener('click', function(){
+    localStorage.removeItem('products');  //remove tfasakh l produit
+    shopGrid.innerHTML = '<p>All products deleted. You can add new products now</p>';//msg yben baaed ma tfkh
+});
+
+//bch taaml load ll page
+window.addEventListener('load', loadProducts);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+/* SHOP GRID */
+.shop-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+gap:25px;
+margin-top:30px;
+width:100%;
+max-width:1200px;
+}
+
+/* PRODUCT CARD */
+.product-card{
+background:#111;
+border:2px solid #00f7ff;
+border-radius:15px;
+padding:15px;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+transition:0.3s;
+cursor:pointer;
+}
+
+.product-card:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #00f7ff;
+}
+
+/* PRODUCT IMAGE */
+.product-card img{
+width:180px;
+height:180px;
+object-fit:cover;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+/* PRODUCT NAME */
+.product-card h3{
+color:white;
+font-size:20px;
+margin:5px 0;
+}
+
+/* PRODUCT PRICE */
+.product-card .price{
+color:#00f7ff;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+/* ADD TO CART BUTTON */
+.product-card .shop-btn{
+width:160px;
+padding:10px;
+font-size:16px;
+font-weight:bold;
+border:none;
+border-radius:10px;
+background:#00f7ff;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.product-card .shop-btn:hover{
+background:#00c4cc;
+transform:scale(1.05);
+}
