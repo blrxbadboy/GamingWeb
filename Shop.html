@@ -1,64 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>BLRX SHOP - Shop</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>BLRX SHOP - Shop</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="content">
+    <div class="content">
 
-<img src="logo.png" class="logo-img">
-<h1 class="logo-text">BLRX SHOP</h1>
-<h2>Game Store</h2>
-<p>Browse the games added by sellers</p>
+        <img src="logo.png" class="logo-img">
+        <h1 class="logo-text">BLRX SHOP</h1>
+        <h2>Game Store</h2>
+        <p>Browse the games added by sellers</p>
 
 
-<button class="shop-btn" id="clearBtn">Delete All Products</button>
 
-<div class="shop-grid" id="shopGrid"></div>
+        <div id="cartContainer">
+            <button id="cartBtn" class="shop-btn">🛒 Cart</button>
+            <div id="cartList"></div>
 
-</div>
 
-<script>
-var shopGrid = document.getElementById('shopGrid');
-var clearBtn = document.getElementById('clearBtn');
+            <div class="shop-grid" id="shopGrid"></div>
 
-// taaml load ll produit
-function loadProducts() {
-    var products = JSON.parse(localStorage.getItem('products')) || [];
-    shopGrid.innerHTML = '';
+        </div>
 
-    if(products.length === 0){
-        shopGrid.innerHTML = '<p style="color:#aaa; font-size:18px;">No products yet.</p>';
-        return;
-    }
+    </div>
+    <script>
+        var shopGrid = document.getElementById('shopGrid');
+        var clearBtn = document.getElementById('clearBtn');
 
-    products.forEach(p => {
-        var card = document.createElement('div');
-        card.classList.add('product-card');
+        // taaml load ll produit
+        function loadProducts() {
+            var products = JSON.parse(localStorage.getItem('products')) || [];
+            shopGrid.innerHTML = '';
 
-        card.innerHTML = `
-            <img src="${p.img}" alt="${p.name}">
+            if (products.length === 0) {
+                shopGrid.innerHTML = '<p>No products yet.</p>';
+                return;
+            }
+
+            products.forEach(p => {
+                var card = document.createElement('div');
+                card.classList.add('product-card');
+
+                card.innerHTML = `
+            <img src="${p.img}">
             <h3>${p.name}</h3>
             <p class="price">$${p.price}</p>
             <p class="desc">${p.desc}</p>
+            <button class="shop-btn">Add to Cart</button>
+        `;
+                //bch taaml add bch tben fl panier
+                var btn = card.querySelector(".shop-btn");
+
+                btn.addEventListener("click", function () {
+                    addToCart(p);
+                });
+
+                shopGrid.appendChild(card);
+            });
+        }
+        //function ta l panier
+        function addToCart(product) {
+
+            var cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            cart.push(product);
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            loadCart()
+        }
+        // taaml load ll produit k ytzedu sans click
+        window.addEventListener('load', function () {
+            loadProducts();
+            loadCart();
+        });
+        function loadCart() {
+            var cartDiv = document.getElementById("cartList");
+            var cart = JSON.parse(localStorage.getItem("cart"));
+
+            cartDiv.innerHTML = "";
+
+            cart.forEach((item, index) => {
+                var div = document.createElement("div");
+                div.classList.add("cart-item");
+
+                div.innerHTML = `
+            <span>${item.name} - $${item.price}</span>
+            <button class="cart-remove">X</button>
         `;
 
-        shopGrid.appendChild(card);
-    });
-}
+                //add remove functionality
+                var removeBtn = div.querySelector(".cart-remove");
+                removeBtn.addEventListener("click", function () {
+                    cart.splice(index, 1); //tfasakhha ml tableau ly andha
+                    localStorage.setItem("cart", JSON.stringify(cart)); //taaml update storage
+                    loadCart(); //reload cart
+                });
 
-//button ly tfasakh
-clearBtn.addEventListener('click', function(){
-    localStorage.removeItem('products');  //remove tfasakh l produit
-    shopGrid.innerHTML = '<p>All products deleted. You can add new products now</p>';//msg yben baaed ma tfkh
-});
+                cartDiv.appendChild(div);
+            });
+        }
+        //bch tthal lcard b fazet css
+        var cartBtn = document.getElementById("cartBtn");
+        var cartList = document.getElementById("cartList");
 
-//bch taaml load ll page
-window.addEventListener('load', loadProducts);
-</script>
+        cartBtn.addEventListener("click", function () {
+
+            if (cartList.style.display === "none") {
+                cartList.style.display = "block";
+            } else {
+                cartList.style.display = "none";
+            }
+
+        });
+        //ma habech ykhdm script fl control lwjt al hal khdm hne khw :')
+    </script>
+
 
 </body>
+
 </html>

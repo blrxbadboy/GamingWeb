@@ -115,28 +115,7 @@ function validateProduct() {
     img.value = '';
     desc.value = '';
 }}
-//shop script
-function loadProducts(){
-    var shopGrid = document.getElementById('shopGrid');
-    var products = JSON.parse(localStorage.getItem('products'));//yekhou products saved fl localstorage
 
-    shopGrid.innerHTML = '';
-
-    products.forEach(p => {
-        var card = document.createElement('div');
-        card.classList.add('product-card');
-
-        card.innerHTML = `
-            <img src="${p.img}">
-            <h3>${p.name}</h3>
-            <p class="price">$${p.price}</p>
-            <p class="desc">${p.desc}</p>
-            <button class="shop-btn">Add to Cart</button>
-        `;
-
-        shopGrid.appendChild(card);
-    });
-}
 
 // taaml load ll produit k ytzedu
 window.onload = loadProducts;
