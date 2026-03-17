@@ -11,10 +11,11 @@
 
     <div class="content">
 
-        <img src="logo.png" class="logo-img">
+
         <h1 class="logo-text">BLRX SHOP</h1>
         <h2>Game Store</h2>
         <p>Browse the games added by sellers</p>
+        <input type="text" id="searchInput" placeholder="Search for products..." class="search-bar">
 
 
 
@@ -33,36 +34,57 @@
         var clearBtn = document.getElementById('clearBtn');
 
         // taaml load ll produit
-        function loadProducts() {
-            var products = JSON.parse(localStorage.getItem('products')) || [];
-            shopGrid.innerHTML = '';
+        function loadProducts(productsList) {
 
-            if (products.length === 0) {
-                shopGrid.innerHTML = '<p>No products yet.</p>';
-                return;
-            }
+    var products = productsList || JSON.parse(localStorage.getItem('products')) || [];
+    shopGrid.innerHTML = '';
 
-            products.forEach(p => {
-                var card = document.createElement('div');
-                card.classList.add('product-card');
+    if (products.length === 0) {
+        shopGrid.innerHTML = '<p>No products found.</p>';
+        return;
+    }
 
-                card.innerHTML = `
+    products.forEach(p => {
+        var card = document.createElement('div');
+        card.classList.add('product-card');
+
+        card.innerHTML = `
             <img src="${p.img}">
             <h3>${p.name}</h3>
             <p class="price">$${p.price}</p>
             <p class="desc">${p.desc}</p>
             <button class="shop-btn">Add to Cart</button>
         `;
-                //bch taaml add bch tben fl panier
-                var btn = card.querySelector(".shop-btn");
 
-                btn.addEventListener("click", function () {
-                    addToCart(p);
-                });
+        var btn = card.querySelector(".shop-btn");
+        //bch taaml add bch tben fl panier
 
-                shopGrid.appendChild(card);
-            });
-        }
+        btn.addEventListener("click", function () {
+            addToCart(p);
+        });
+
+        shopGrid.appendChild(card);
+    });
+}
+        //search bar 
+        var searchInput = document.getElementById('searchInput');
+
+
+        searchInput.addEventListener('input', function () {
+            var value = searchInput.value.toLowerCase();//bar search en miniscul
+
+            var products = JSON.parse(localStorage.getItem('products')) || [];
+
+            var filtered = products.filter(p =>
+                p.name.toLowerCase().includes(value)
+            );
+
+            loadProducts(filtered);
+        });
+
+        window.addEventListener('load', function () {
+            loadProducts();
+        });
         //function ta l panier
         function addToCart(product) {
 
@@ -74,7 +96,7 @@
 
             loadCart()
         }
-        // taaml load ll produit k ytzedu sans click
+        // taaml load ll produit k ytzedu sans click just b load
         window.addEventListener('load', function () {
             loadProducts();
             loadCart();

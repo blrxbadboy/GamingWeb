@@ -13,7 +13,7 @@ function validateSignUp() {
     var passwordError = document.getElementById('password-error');
     var confirmError = document.getElementById('confirm-error');
 
-    // bch yfasakh ay msg erreur tktb
+    // bch yfasakh ay msg erreur maktoub deja
     usernameError.textContent = '';
     emailError.textContent = '';
     passwordError.textContent = '';
@@ -51,6 +51,7 @@ function validateSignUp() {
 
 function validateProduct() {
     var valid = true;
+    //valid amaltha true bch kl condition ghalta tsyr ttbadl false w ma ttadeech
 
     var name = document.getElementById('productName');
     var price = document.getElementById('productPrice');
@@ -99,7 +100,7 @@ function validateProduct() {
 
     // taamlu push
     products.push({
-        name: name.value.trim(),
+        name: name.value.trim(),//trim bch tfasakh espaces ken mwjoudyn mloul w mlkhr
         price: price.value.trim(),
         img: img.value.trim(),
         desc: desc.value.trim()
